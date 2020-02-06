@@ -2,7 +2,7 @@ const router = require("express").Router();
 const Twitter = require("twit");
 let io = process.io;
 
-let T = new Twitter({
+let twitter = new Twitter({
     consumer_key: process.env.CONSUMER_KEY,
     consumer_secret: process.env.CONSUMER_SECRET,
     access_token: process.env.ACCESS_TOKEN,
@@ -13,7 +13,7 @@ let twitterStream;
 const startTwitterStream = (term) => {
     console.log('Creating new Twitter stream.')
     stopStreaming();
-    twitterStream = T.stream('statuses/filter', { track: term })
+    twitterStream = twitter.stream('statuses/filter', { track: term })
     twitterStream.on('tweet', function (tweet) {
         io.emit("newTweet", tweet);
     });
