@@ -1,27 +1,14 @@
 const router = require("express").Router();
 const Twitter = require("twit");
-const util = require("util");
-let io = process.io
-let socket = process.socket
+let io = process.io;
 
 let T = new Twitter({
-    consumer_key: 'hZNQ9dmgAFfIZpNls5OTv426c',
-    consumer_secret: 'IqDxule0qm6YByv7ZL9u81R5QnJFGkIm10e2pSzwTMLf5h91Fq',
-    access_token: '1192319315946508288-O7fY1ApApYWJ1SfBKUCmI0hGUVKc6q',
-    access_token_secret: 'Sc3xSWqRrz1D7m31ilf0YHoXV17V17EJuCpZSQyCETEGB'
+    consumer_key: process.env.CONSUMER_KEY,
+    consumer_secret: process.env.CONSUMER_SECRET,
+    access_token: process.env.ACCESS_TOKEN,
+    access_token_secret: process.env.ACCESS_TOKEN_SECRET,
 });
-// router.get("/", (req, res) => {
 
-//     twitter.stream('statuses/filter', { track: "#SOTU" }, (stream) => {
-
-//         stream.on('tweet', (data) => {
-//             console.log(util.inspect(data), "Getting....");
-//             stream.destroy();
-//         });
-//         stream.on('error', (err) => { throw err })
-//     })
-//     res.send({ message: "Getting tweets !" })
-// })
 let twitterStream;
 const startTwitterStream = (term) => {
     console.log('Creating new Twitter stream.')
@@ -45,11 +32,11 @@ io.on('connection', (s) => {
     s.on('disconnect', () => {
         stopStreaming();
     });
-    
+
     s.on('stop_streaming', () => {
         stopStreaming();
     });
 
-    
+
 });
 module.exports = router;

@@ -12,9 +12,9 @@ function Toolbar(props) {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item toolbar">
-                            <a className="nav-link" id="dropdownMenuButton" data-toggle="dropdown"  aria-expanded="false"><i className="fa fa-bell"></i>&nbsp;<span className="badge badge-primary">{props.notificationCount}</span></a>
+                            <a className="nav-link" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"><i className="fa fa-bell"></i>&nbsp;<span className="badge badge-primary">{props.notificationCount}</span></a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" onClick={()=>{props.onClickCount(); props.clearTweets()}} >Clear Tweets</a>
+                                <a class="dropdown-item" onClick={() => { props.onClickCount(); props.clearTweets() }} >Clear Tweets</a>
                                 {
                                     props.isSearched ? (
                                         <React.Fragment>
@@ -42,7 +42,7 @@ const mapDispatchToProps = dispatch => {
                 type: 'CLEAR_NOTIFICATION'
             })
         },
-        
+
         stopStreaming: () => {
             dispatch({
                 type: 'STOP_STREAMING'
